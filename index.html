@@ -12,6 +12,12 @@
         <script>
             var $container = document.getElementById('container');
 
+
+            var maxWidth = window.innerWidth/2;
+            var maxHeight = window.innerHeight/2;
+            
+            console.log("maxWidth: " + maxWidth + " maxHeight: " + maxHeight);
+
             var threePlayers = [
                 {x: -200, y: -350},
                 {x: -100, y: -350},
@@ -71,7 +77,7 @@
 
             do {
                 game = prompt("Which game? (IrishPoker, rigged, or AcesAndKings)");
-            } while (game !== "IrishPoker" && game !== "AcesAndKings" && game !== "rigged");
+            } while (game.toLowerCase() !== "irishpoker" &&game.toLowerCase() !== 'irish poker' && game.toLowerCase() !== "acesandkings" && game.toLowerCase() !== "rigged" && game.toLowerCase() !== 'aces and kings');
 
 
             var players;
@@ -90,9 +96,6 @@
 
             function IrishPoker(players){
             //shuffle 5 times
-            
-            console.log(window.innerWidth);
-            console.log(window.innerHeight);
             
             setTimeout(() => {
                 
@@ -248,9 +251,9 @@
 
 
 
-            if (game == "IrishPoker") {
+            if (game == "irish poker" || game == "irishpoker") {
                 IrishPoker(players);
-            } else if (game == "AcesAndKings") {
+            } else if (game == "acesandkings" || game == "aces and kings") {
                 AcesAndKings(players);
             } else if (game == "rigged") {
                 rigged(players);
