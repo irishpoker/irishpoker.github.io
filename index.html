@@ -15,8 +15,10 @@
 
             var maxWidth = window.innerWidth/2;
             var maxHeight = window.innerHeight/2;
-            
+            var center = { x: 0, y: 0 };
+
             console.log("maxWidth: " + maxWidth + " maxHeight: " + maxHeight);
+
 
             var threePlayers = [
                 {x: -200, y: -350},
@@ -62,6 +64,25 @@
 
             ];
 
+
+            var iterationX = maxWidth/12;
+            var iterationY = maxHeight/12;
+
+            var onePlayer = [
+                {x: -(iterationX*2), y: -(iterationY*3)},
+                {x: -iterationX*1, y: -(iterationY*3)},
+                {x: 0, y: -(iterationY*3)},
+                {x: iterationX, y: -(iterationY*3)},
+                {x: -iterationX*7.5, y: iterationY*2},
+                {x: -iterationX*6.5, y: iterationY*2},
+                {x: -iterationX*7.5, y: iterationY*0.75},
+                {x: -iterationX*6.5, y: iterationY*0.75},
+                {x: -iterationX*7.5, y: -iterationY*0.5},
+                {x: -iterationX*6.5, y: -iterationY*0.5},
+                {x: -iterationX*7.5, y: -iterationY*1.75},
+                {x: -iterationX*6.5, y: -iterationY*1.75},
+            ]
+
             function riggedCard() {
                 const values = [1, 7, 8, 9, 10, 11, 12, 13];
                 const randomIndex = Math.floor(Math.random() * values.length);
@@ -82,8 +103,8 @@
 
             var players;
             do {
-                players = prompt("How many players? (Enter 2 or 3)");
-            } while (players !== "2" && players !== "3");
+                players = prompt("How many players? (Enter 1 through 3)");
+            } while (players !== "1" && players !== "2" && players !== "3");
 
 
 
@@ -124,16 +145,14 @@
             });
             }, 3000);
 
-                if (players == 2) {
+                if (players == 1) {
+                    array = onePlayer;
+                } else if (players == 2) {
                     array = twoPlayers;
                 } else if (players == 3) {
                     array = threePlayers;
                 }
 
-                deck.cards[4]['rank'] = 1;
-                deck.cards[5]['rank'] = 1;
-                deck.cards[6]['rank'] = 1;
-                deck.cards[7]['rank'] = 1;
             setTimeout(() => {
                 for (i = 0; i < array.length+1; i++) {
                 console.log("i: " + i);
