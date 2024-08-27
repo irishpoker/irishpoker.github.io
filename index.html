@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cards</title>
     <link rel="stylesheet" href="libs/deck-of-cards/example/example.css">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div id="container"></div>
+
+    <!-- Game Type Modal -->
+    <div id="gameTypeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeGameType">×</span>
+            <h2>Select Game Type</h2>
+            <button onclick="selectGameType('irishpoker')">Irish Poker</button>
+            <button onclick="selectGameType('rigged')">Rigged</button>
+            <button onclick="selectGameType('acesandkings')">Aces and Kings</button>
+        </div>
+    </div>
+
+    <!-- Player Count Modal -->
+    <div id="playerCountModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closePlayerCount">×</span>
+            <h2>Select Number of Players</h2>
+            <button onclick="selectPlayerCount(1)">1</button>
+            <button onclick="selectPlayerCount(2)">2</button>
+            <button onclick="selectPlayerCount(3)">3</button>
+        </div>
+    </div>
+
     <script src="libs/deck-of-cards/dist/deck.min.js"></script>
     <script>
         const $container = document.getElementById('container');
@@ -50,20 +108,49 @@
         const deck = Deck(true);
         deck.mount($container);
 
-        const getGameType = () => {
-            let game;
-            do {
-                game = prompt("Which game? (IrishPoker, rigged, or AcesAndKings)").toLowerCase().trim();
-            } while (!["irishpoker", "irish poker", "acesandkings", "rigged", "aces and kings"].includes(game));
-            return game;
+        const gameTypeModal = document.getElementById('gameTypeModal');
+        const playerCountModal = document.getElementById('playerCountModal');
+        const closeGameType = document.getElementById('closeGameType');
+        const closePlayerCount = document.getElementById('closePlayerCount');
+
+        let selectedGameType = '';
+        let selectedPlayerCount = 0;
+
+        const showGameTypeModal = () => {
+            gameTypeModal.style.display = 'block';
         };
 
-        const getPlayerCount = () => {
-            let players;
-            do {
-                players = prompt("How many players? (Enter 1 through 3)");
-            } while (!["1", "2", "3"].includes(players));
-            return parseInt(players);
+        const showPlayerCountModal = () => {
+            playerCountModal.style.display = 'block';
+        };
+
+        const selectGameType = (game) => {
+            selectedGameType = game;
+            gameTypeModal.style.display = 'none';
+            showPlayerCountModal();
+        };
+
+        const selectPlayerCount = (count) => {
+            selectedPlayerCount = count;
+            playerCountModal.style.display = 'none';
+            setupGame(selectedGameType, selectedPlayerCount);
+        };
+
+        closeGameType.onclick = () => {
+            gameTypeModal.style.display = 'none';
+        };
+
+        closePlayerCount.onclick = () => {
+            playerCountModal.style.display = 'none';
+        };
+
+        window.onclick = (event) => {
+            if (event.target == gameTypeModal) {
+                gameTypeModal.style.display = 'none';
+            }
+            if (event.target == playerCountModal) {
+                playerCountModal.style.display = 'none';
+            }
         };
 
         const animateCards = (cards, coords, delayFactor) => {
@@ -108,9 +195,7 @@
             }
         };
 
-        const game = getGameType();
-        const players = getPlayerCount();
-        setupGame(game, players);
+        showGameTypeModal();
     </script>
 </body>
 </html>
