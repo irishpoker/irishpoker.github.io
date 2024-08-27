@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cards</title>
+    <title>Irish Poker Suite</title>
     <link rel="stylesheet" href="libs/deck-of-cards/example/example.css">
     <style>
         .modal {
@@ -22,7 +22,7 @@
         }
         .modal-content {
             background-color: #fefefe;
-            margin: 5% auto;
+            margin: 10% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
@@ -39,6 +39,12 @@
             text-decoration: none;
             cursor: pointer;
         }
+        .buttons {
+            font-size: 20px;
+            padding: 15px 30px;
+            margin-top: 5px;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -49,9 +55,9 @@
         <div class="modal-content">
             <span class="close" id="closeGameType">×</span>
             <h2>Select Game Type</h2>
-            <button onclick="selectGameType('irishpoker')">Irish Poker</button>
-            <button onclick="selectGameType('rigged')">Rigged</button>
-            <button onclick="selectGameType('acesandkings')">Aces and Kings</button>
+            <button class = "buttons" onclick="selectGameType('irishpoker')">Irish Poker</button>
+            <button class = "buttons" onclick="selectGameType('rigged')">Rigged</button>
+            <button class = "buttons" onclick="selectGameType('acesandkings')">Aces and Kings</button>
         </div>
     </div>
 
@@ -60,9 +66,9 @@
         <div class="modal-content">
             <span class="close" id="closePlayerCount">×</span>
             <h2>Select Number of Players</h2>
-            <button onclick="selectPlayerCount(1)">1</button>
-            <button onclick="selectPlayerCount(2)">2</button>
-            <button onclick="selectPlayerCount(3)">3</button>
+            <button class="buttons" onclick="selectPlayerCount(1)">1</button>
+            <button class="buttons" onclick="selectPlayerCount(2)">2</button>
+            <button class="buttons" onclick="selectPlayerCount(3)">3</button>
         </div>
     </div>
 
