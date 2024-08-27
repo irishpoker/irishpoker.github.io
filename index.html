@@ -1,288 +1,116 @@
-<html>
-    <head>
-        <title>Cards</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards</title>
+    <link rel="stylesheet" href="libs/deck-of-cards/example/example.css">
+</head>
+<body>
+    <div id="container"></div>
+    <script src="libs/deck-of-cards/dist/deck.min.js"></script>
+    <script>
+        const $container = document.getElementById('container');
+        const maxWidth = window.innerWidth;
+        const maxHeight = window.innerHeight;
 
-        <link rel="stylesheet" href="libs/deck-of-cards/example/example.css">
-    </head>
-    <body>
-        <script src="libs/deck-of-cards/dist/deck.min.js"></script>
+        const scaleCoords = (coord) => ({
+            x: coord.x * (maxWidth / 1920),
+            y: coord.y * (maxHeight / 1080)
+        });
 
-        <div id="container"></div>
-
-        <script>
-        var $container = document.getElementById('container');
-
-
-        var maxWidth = window.innerWidth;
-        var maxHeight = window.innerHeight;
-
-        function scaleCoords(coord, maxWidth, maxHeight) {
-            return {
-                x: coord.x * (maxWidth / 1920), // Assuming 1920 is the base width
-                y: coord.y * (maxHeight / 1080) // Assuming 1080 is the base height
-            };
-        }
-
-
-        var threePlayers = [
-
-            {x: -200, y: -350},
-            {x: -100, y: -350},
-            {x: 0, y: -350},
-            {x: 100, y: -350},
-            {x: 500, y: 0},
-            {x: 600, y: 0},
-            {x: 700, y: 0},
-            {x: 800, y: 0},
-            {x: -200, y: 350},
-            {x: -100, y: 350},
-            {x: 0, y: 350},
-            {x: 100, y: 350},
-            {x: -850, y: 200},
-            {x: -750, y: 200},
-            {x: -850, y: 75},
-            {x: -750, y: 75},
-            {x: -850, y: -50},
-            {x: -750, y: -50},
-            {x: -850, y: -175},
-            {x: -750, y: -175},
-
-        ].map(coord => scaleCoords(coord, maxWidth, maxHeight));
-
-        var twoPlayers = [
-
-            {x: -200, y: -350},
-            {x: -100, y: -350},
-            {x: 0, y: -350},
-            {x: 100, y: -350},
-            {x: -200, y: 350},
-            {x: -100, y: 350},
-            {x: 0, y: 350},
-            {x: 100, y: 350},
-            {x: -850, y: 200},
-            {x: -750, y: 200},
-            {x: -850, y: 75},
-            {x: -750, y: 75},
-            {x: -850, y: -50},
-            {x: -750, y: -50},
-            {x: -850, y: -175},
-            {x: -750, y: -175},
-
-        ].map(coord => scaleCoords(coord, maxWidth, maxHeight));
-
-
-        var onePlayer = [
-
-
-            {x: -200, y: -350},
-            {x: -100, y: -350},
-            {x: 0, y: -350},
-            {x: 100, y: -350},
-            {x: -850, y: 200},
-            {x: -750, y: 200},
-            {x: -850, y: 75},
-            {x: -750, y: 75},
-            {x: -850, y: -50},
-            {x: -750, y: -50},
-            {x: -850, y: -175},
-            {x: -750, y: -175},
-
-
-        ]
-
-        var deckCoords = scaleCoords({ x: 800, y: 350 }, maxWidth, maxHeight);
-
-        function riggedCard() {
-            const values = [1, 7, 8, 9, 10, 11, 12, 13];
-            const randomIndex = Math.floor(Math.random() * values.length);
-            return values[randomIndex];
+        const playerCoords = {
+            1: [
+                {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350},
+                {x: -850, y: 200}, {x: -750, y: 200}, {x: -850, y: 75}, {x: -750, y: 75},
+                {x: -850, y: -50}, {x: -750, y: -50}, {x: -850, y: -175}, {x: -750, y: -175}
+            ],
+            2: [
+                {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350},
+                {x: -200, y: 350}, {x: -100, y: 350}, {x: 0, y: 350}, {x: 100, y: 350},
+                {x: -850, y: 200}, {x: -750, y: 200}, {x: -850, y: 75}, {x: -750, y: 75},
+                {x: -850, y: -50}, {x: -750, y: -50}, {x: -850, y: -175}, {x: -750, y: -175}
+            ],
+            3: [
+                {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350},
+                {x: 500, y: 0}, {x: 600, y: 0}, {x: 700, y: 0}, {x: 800, y: 0},
+                {x: -200, y: 350}, {x: -100, y: 350}, {x: 0, y: 350}, {x: 100, y: 350},
+                {x: -850, y: 200}, {x: -750, y: 200}, {x: -850, y: 75}, {x: -750, y: 75},
+                {x: -850, y: -50}, {x: -750, y: -50}, {x: -850, y: -175}, {x: -750, y: -175}
+            ]
         };
 
-        var deck = Deck(true);
+        const deckCoords = scaleCoords({ x: 800, y: 350 });
 
-        // add to DOM
+        const riggedCard = () => {
+            const values = [1, 7, 8, 9, 10, 11, 12, 13];
+            return values[Math.floor(Math.random() * values.length)];
+        };
+
+        const deck = Deck(true);
         deck.mount($container);
 
-        var game;
+        const getGameType = () => {
+            let game;
+            do {
+                game = prompt("Which game? (IrishPoker, rigged, or AcesAndKings)").toLowerCase().trim();
+            } while (!["irishpoker", "irish poker", "acesandkings", "rigged", "aces and kings"].includes(game));
+            return game;
+        };
 
-        do {
-            game = prompt("Which game? (IrishPoker, rigged, or AcesAndKings)");
-        } while (
-            game.toLowerCase().trim() !== "irishpoker" 
-                && game.toLowerCase().trim() !== 'irish poker' 
-                && game.toLowerCase().trim() !== "acesandkings" 
-                && game.toLowerCase().trim() !== "rigged" 
-                && game.toLowerCase().trim() !== 'aces and kings'
-        );
+        const getPlayerCount = () => {
+            let players;
+            do {
+                players = prompt("How many players? (Enter 1 through 3)");
+            } while (!["1", "2", "3"].includes(players));
+            return parseInt(players);
+        };
 
+        const animateCards = (cards, coords, delayFactor) => {
+            cards.forEach((card, i) => {
+                card.enableFlipping();
+                card.enableDragging();
+                card.animateTo({
+                    delay: 1000 + i ** delayFactor,
+                    duration: 500,
+                    ease: 'quartOut',
+                    x: coords[i].x,
+                    y: coords[i].y
+                });
+            });
+        };
 
-        var players;
-        do {
-            players = prompt("How many players? (Enter 1 through 3)");
-        } while (players !== "1" && players !== "2" && players !== "3");
-
-
-
-        deck.shuffle();
-        deck.shuffle();
-        deck.shuffle();
-        deck.shuffle();
-        deck.shuffle();
-
-        
-
-        function IrishPoker(players){
+        const setupGame = (game, players) => {
+            const coords = playerCoords[players].map(scaleCoords);
+            deck.shuffle();
+            deck.shuffle();
+            deck.shuffle();
+            deck.shuffle();
+            deck.shuffle();
 
             setTimeout(() => {
-
-                //deck.cards[4]['rank'] = 1;
-                //deck.cards[4]['suit'] = 0;
-                //deck.cards[5]['rank'] = 1;
-                //deck.cards[5]['suit'] = 1;
-                //deck.cards[6]['rank'] = 1;
-                //deck.cards[6]['suit'] = 2;
-                //deck.cards[7]['rank'] = 1;
-                //deck.cards[7]['suit'] = 3;
-
-                deck.cards.forEach(function (card, i) {
-
-                    card.enableFlipping();
-                    card.enableDragging();
-
-                    // move cards to lower right
-                    card.animateTo({
-                        delay: 1000 + i ** 1.5, 
-                        duration: 500,
-                        ease: 'quartOut',
-
-                        x: deckCoords.x,
-                        y: deckCoords.y,
-                    });
-                });
+                animateCards(deck.cards, Array(deck.cards.length).fill(deckCoords), 1.5);
             }, 3000);
 
-            if (players == 1) {
-                array = onePlayer;
-            } else if (players == 2) {
-                array = twoPlayers;
-            } else if (players == 3) {
-                array = threePlayers;
-            }
-
             setTimeout(() => {
-                for (i = 0; i < array.length+1; i++) {
-                    deck.cards[i].animateTo({
-                        delay: 1000 + i ** 2.5, 
-                        duration: 500,
-                        ease: 'quartOut',
-                        x: array[i].x,
-                        y: array[i].y
-                    });
-                }
+                animateCards(deck.cards.slice(0, coords.length), coords, 2.5);
             }, 5000);
 
-
-
-        }
-
-        function AcesAndKings(players){
-
-
-            setTimeout(() => {
-
-                deck.cards.forEach(function (card, i) {
-
-                    card.enableFlipping();
-                    card.enableDragging();
-
-                    card['rank'] = (Math.floor(Math.random() * 1000) + 1) % 2 ? 13 : 1;
-                    card['suit'] = (Math.floor(Math.random() * 1000) + 1) % 4;
-                    // move cards to lower right
-                    card.animateTo({
-                        delay: 1000 + i ** 1.5, 
-                        duration: 500,
-                        ease: 'quartOut',
-
-                        x: deckCoords.x,
-                        y: deckCoords.y,
-                    });
+            if (game === "acesandkings" || game === "aces and kings") {
+                deck.cards.forEach(card => {
+                    card.rank = Math.random() < 0.5 ? 13 : 1;
+                    card.suit = Math.floor(Math.random() * 4);
                 });
-            }, 3000);
-
-            if (players == 1) {
-                array = onePlayer;
-            } else if (players == 2) {
-                array = twoPlayers;
-            } else if (players == 3) {
-                array = threePlayers;
-            }
-
-            setTimeout(() => {
-                for (i = 0; i < array.length+1; i++) {
-                    deck.cards[i].animateTo({
-                        delay: 1000 + i ** 2.5, 
-                        duration: 500,
-                        ease: 'quartOut',
-                        x: array[i].x,
-                        y: array[i].y
-                    });
-                }
-            }, 5000);
-        }
-
-
-        function rigged(players) {
-
-            setTimeout(() => {
-
-                deck.cards.forEach(function (card, i) {
-
-                    card.enableFlipping();
-                    card.enableDragging();
-
-                    card['rank'] = riggedCard()
-                    // move cards to lower right
-                    card.animateTo({
-                        delay: 1000 + i ** 1.5, 
-                        duration: 500,
-                        ease: 'quartOut',
-
-                        x: deckCoords.x,
-                        y: deckCoords.y,
-                    });
+            } else if (game === "rigged") {
+                deck.cards.forEach(card => {
+                    card.rank = riggedCard();
                 });
-            }, 3000);
-
-            if (players == 1) {
-                array = onePlayer;
-            } else if (players == 2) {
-                array = twoPlayers;
-            } else if (players == 3) {
-                array = threePlayers;
             }
+        };
 
-            setTimeout(() => {
-                for (i = 0; i < array.length+1; i++) {
-                    deck.cards[i].animateTo({
-                        delay: 1000 + i ** 2.5, 
-                        duration: 500,
-                        ease: 'quartOut',
-                        x: array[i].x,
-                        y: array[i].y
-                    });
-                }
-            }, 5000);
-        }
-
-
-
-        if (game == "irish poker" || game == "irishpoker") {
-            IrishPoker(players);
-        } else if (game == "acesandkings" || game == "aces and kings") {
-            AcesAndKings(players);
-        } else if (game == "rigged") {
-            rigged(players);
-        }
-        </script>
-    </body>
+        const game = getGameType();
+        const players = getPlayerCount();
+        setupGame(game, players);
+    </script>
+</body>
 </html>
