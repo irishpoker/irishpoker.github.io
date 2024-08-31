@@ -58,6 +58,7 @@
             <button class = "buttons" onclick="selectGameType('irishpoker')">Irish Poker</button>
             <button class = "buttons" onclick="selectGameType('rigged')">Rigged</button>
             <button class = "buttons" onclick="selectGameType('acesandkings')">Aces and Kings</button>
+            <button class = "buttons" onclick="selectGameType('horserace')">Horse Race</button>
         </div>
     </div>
 
@@ -188,7 +189,11 @@
         const selectGameType = (game) => {
             selectedGameType = game;
             gameTypeModal.style.display = 'none';
-            showPlayerCountModal();
+            if (game !== 'horserace'){
+                showPlayerCountModal();
+            } else {
+                setupGame(selectedGameType, selectedPlayerCount);
+            }
         };
 
         const selectPlayerCount = (count) => {
@@ -229,6 +234,11 @@
         };
 
         const setupGame = (game, players) => {
+            if(game === "horserace"){
+                
+            } else {
+
+
             const coords = playerCoords[players].map(scaleCoords);
             deck.shuffle();
             deck.shuffle();
@@ -266,6 +276,7 @@
                 deck.cards.forEach(card => {
                     card.rank = riggedCard();
                 });
+            }
             }
         };
 
