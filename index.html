@@ -58,7 +58,7 @@
             <button class = "buttons" onclick="selectGameType('irishpoker')">Irish Poker</button>
             <button class = "buttons" onclick="selectGameType('rigged')">Rigged</button>
             <button class = "buttons" onclick="selectGameType('acesandkings')">Aces and Kings</button>
-            <button class = "buttons" onclick="selectGameType('horserace')">Horse Race (not implemented)</button>
+            <button class = "buttons" onclick="selectGameType('horserace')">Horse Race (Desktop only)</button>
         </div>
     </div>
 
@@ -88,7 +88,7 @@
             x: coord.x * (maxWidth / 1920),
             y: coord.y * (maxHeight / 1080)
         });
-
+        
         const playerCoords = {
             1: [
                 {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350}, // player 1
@@ -111,37 +111,37 @@
             4: [
                 {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350}, //player 1
                 {x: 500, y: -100}, {x: 600, y: -100}, {x: 700, y: -100}, {x: 800, y: -100}, //player 2
-                {x: -200, y: 250}, {x: -100, y: 250}, {x: 0, y: 250}, {x: 100, y: 250},     //player 4
-                {x: 500, y: 100}, {x: 600, y: 100}, {x: 700, y: 100}, {x: 800, y: 100},     //player 3
+                {x: -200, y: 250}, {x: -100, y: 250}, {x: 0, y: 250}, {x: 100, y: 250},     //player 3
+                {x: 500, y: 100}, {x: 600, y: 100}, {x: 700, y: 100}, {x: 800, y: 100},     //player 4
                 {x: -850, y: 200}, {x: -750, y: 200}, {x: -850, y: 65}, {x: -750, y: 65},   //main event
                 {x: -850, y: -70}, {x: -750, y: -70}, {x: -850, y: -205}, {x: -750, y: -205}
             ],
             5:[
                 {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350}, //player 1
                 {x: 500, y: -200}, {x: 600, y: -200}, {x: 700, y: -200}, {x: 800, y: -200}, //player 2
-                {x: -200, y: 250}, {x: -100, y: 250}, {x: 0, y: 250}, {x: 100, y: 250},     //player 5
-                {x: 500, y: 0}, {x: 600, y: 0}, {x: 700, y: 0}, {x: 800, y: 0},             //player 3
-                {x: 500, y: 200}, {x: 600, y: 200}, {x: 700, y: 200}, {x: 800, y: 200},     //player 4
+                {x: -200, y: 250}, {x: -100, y: 250}, {x: 0, y: 250}, {x: 100, y: 250},     //player 3
+                {x: 500, y: 0}, {x: 600, y: 0}, {x: 700, y: 0}, {x: 800, y: 0},             //player 4
+                {x: 500, y: 200}, {x: 600, y: 200}, {x: 700, y: 200}, {x: 800, y: 200},     //player 5
                 {x: -850, y: 200}, {x: -750, y: 200}, {x: -850, y: 65}, {x: -750, y: 65},   //main event
                 {x: -850, y: -70}, {x: -750, y: -70}, {x: -850, y: -205}, {x: -750, y: -205}
             ],
             6:[
                 {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350}, //player 1
                 {x: 500, y: -350}, {x: 600, y: -350}, {x: 700, y: -350}, {x: 800, y: -350}, //player 2
-                {x: -200, y: -150}, {x: -100, y: -150}, {x: 0, y: -150}, {x: 100, y: -150},     //player 5
-                {x: 500, y: -150}, {x: 600, y: -150}, {x: 700, y: -150}, {x: 800, y: -150}, //player 3
-                {x: -200, y: 50}, {x: -100, y: 50}, {x: 0, y: 50}, {x: 100, y: 50},     //player 6
-                {x: 500, y: 50}, {x: 600, y: 50}, {x: 700, y: 50}, {x: 800, y: 50},     //player 4
+                {x: -200, y: -150}, {x: -100, y: -150}, {x: 0, y: -150}, {x: 100, y: -150}, //player 3
+                {x: 500, y: -150}, {x: 600, y: -150}, {x: 700, y: -150}, {x: 800, y: -150}, //player 4
+                {x: -200, y: 50}, {x: -100, y: 50}, {x: 0, y: 50}, {x: 100, y: 50},         //player 5
+                {x: 500, y: 50}, {x: 600, y: 50}, {x: 700, y: 50}, {x: 800, y: 50},         //player 6
                 {x: -850, y: 200}, {x: -750, y: 200}, {x: -850, y: 65}, {x: -750, y: 65},   //main event
                 {x: -850, y: -70}, {x: -750, y: -70}, {x: -850, y: -205}, {x: -750, y: -205}
             ],
             7:[
                 {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350}, //player 1
                 {x: 500, y: -350}, {x: 600, y: -350}, {x: 700, y: -350}, {x: 800, y: -350}, //player 2
-                {x: -200, y: -150}, {x: -100, y: -150}, {x: 0, y: -150}, {x: 100, y: -150},     //player 5
-                {x: 500, y: -150}, {x: 600, y: -150}, {x: 700, y: -150}, {x: 800, y: -150}, //player 3
-                {x: -200, y: 50}, {x: -100, y: 50}, {x: 0, y: 50}, {x: 100, y: 50},     //player 6
-                {x: 500, y: 50}, {x: 600, y: 50}, {x: 700, y: 50}, {x: 800, y: 50},     //player 4
+                {x: -200, y: -150}, {x: -100, y: -150}, {x: 0, y: -150}, {x: 100, y: -150}, //player 3
+                {x: 500, y: -150}, {x: 600, y: -150}, {x: 700, y: -150}, {x: 800, y: -150}, //player 4
+                {x: -200, y: 50}, {x: -100, y: 50}, {x: 0, y: 50}, {x: 100, y: 50},         //player 5
+                {x: 500, y: 50}, {x: 600, y: 50}, {x: 700, y: 50}, {x: 800, y: 50},         //player 6
                 {x: 150, y: 250}, {x: 250, y: 250}, {x: 350, y: 250}, {x: 450, y: 250},     //player 7
                 {x: -850, y: 200}, {x: -750, y: 200}, {x: -850, y: 65}, {x: -750, y: 65},   //main event
                 {x: -850, y: -70}, {x: -750, y: -70}, {x: -850, y: -205}, {x: -750, y: -205}
@@ -149,18 +149,24 @@
             8:[
                 {x: -200, y: -350}, {x: -100, y: -350}, {x: 0, y: -350}, {x: 100, y: -350}, //player 1
                 {x: 500, y: -350}, {x: 600, y: -350}, {x: 700, y: -350}, {x: 800, y: -350}, //player 2
-                {x: -200, y: -150}, {x: -100, y: -150}, {x: 0, y: -150}, {x: 100, y: -150},     //player 5
-                {x: 500, y: -150}, {x: 600, y: -150}, {x: 700, y: -150}, {x: 800, y: -150}, //player 3
-                {x: -200, y: 50}, {x: -100, y: 50}, {x: 0, y: 50}, {x: 100, y: 50},     //player 6
-                {x: 500, y: 50}, {x: 600, y: 50}, {x: 700, y: 50}, {x: 800, y: 50},     //player 4
-                {x: -200, y: 250}, {x: -100, y: 250}, {x: 0, y: 250}, {x: 100, y: 250},     //player 6
-                {x: 500, y: 250}, {x: 600, y: 250}, {x: 700, y: 250}, {x: 800, y: 250},     //player 4
+                {x: -200, y: -150}, {x: -100, y: -150}, {x: 0, y: -150}, {x: 100, y: -150}, //player 3
+                {x: 500, y: -150}, {x: 600, y: -150}, {x: 700, y: -150}, {x: 800, y: -150}, //player 4
+                {x: -200, y: 50}, {x: -100, y: 50}, {x: 0, y: 50}, {x: 100, y: 50},         //player 5
+                {x: 500, y: 50}, {x: 600, y: 50}, {x: 700, y: 50}, {x: 800, y: 50},         //player 6
+                {x: -200, y: 250}, {x: -100, y: 250}, {x: 0, y: 250}, {x: 100, y: 250},     //player 7
+                {x: 500, y: 250}, {x: 600, y: 250}, {x: 700, y: 250}, {x: 800, y: 250},     //player 8
                 {x: -850, y: 200}, {x: -750, y: 200}, {x: -850, y: 65}, {x: -750, y: 65},   //main event
                 {x: -850, y: -70}, {x: -750, y: -70}, {x: -850, y: -205}, {x: -750, y: -205}
+            ],
+            999:[
+                {x: -800, y: 150},{x: -800, y: 0},{x: -800, y: -150},{x: -800, y: -300},    //aces
+                {x: -700, y: 300},{x: -600, y: 300},{x: -500, y: 300},                      //race
+                {x: -400, y: 300},{x: -300, y: 300},{x: -200, y: 300},{x: -100, y: 300},
+                {x: 0, y: 300},{x: 100, y: 300},{x: 200, y: 300},{x: 300, y: 300},
+                {x: 400, y: 300},{x: 500, y: 300},{x: 600, y: 300},{x: 700, y: 300}
             ]
         };
 
-        
 
         const riggedCard = () => {
             const values = [1, 7, 8, 9, 10, 11, 12, 13];
@@ -193,6 +199,7 @@
                 showPlayerCountModal();
             } else {
                 setupGame(selectedGameType, selectedPlayerCount);
+                
             }
         };
 
@@ -235,7 +242,43 @@
 
         const setupGame = (game, players) => {
             if(game === "horserace"){
+                const coords = playerCoords[999].map(scaleCoords);
+                var deckCoords = scaleCoords({ x: -420, y: -475 });
+               
+
+                deck.shuffle();
+                deck.shuffle();
+                deck.shuffle();
+                deck.shuffle();
+                deck.shuffle();
+                deck.shuffle();
+                deck.shuffle();
+                deck.shuffle();
+
+                setTimeout(() => {
+                    animateCards(deck.cards, Array(deck.cards.length).fill(deckCoords), 1.5);
+                }, 4000);
+
+                setTimeout(() => {
+                    animateCards(deck.cards.slice(0, coords.length), coords, 2.5);
+                    deck.cards[0].rank = 1;
+                    deck.cards[0].suit = 0;
+                    deck.cards[1].rank = 1;
+                    deck.cards[1].suit = 1;
+                    deck.cards[2].rank = 1;
+                    deck.cards[2].suit = 2;
+                    deck.cards[3].rank = 1;
+                    deck.cards[3].suit = 3;
+
+                    for (let i = 4; i < coords.length; i++) {
+                        deck.cards[i].rank = Math.floor(Math.random() * (13 - 2 + 1)) + 2; 
+                        }    
+
+                }, 6000);
+
+
                 
+
             } else {
 
 
